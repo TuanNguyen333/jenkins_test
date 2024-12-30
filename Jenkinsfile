@@ -13,6 +13,11 @@ pipeline {
                 echo 'Running Batch Script 1...'
                  bat 'exit 1'
             }
+            post {
+                failure {
+                    echo 'Stage 1 failed, continuing to Stage 2...'
+                }
+            }
         }
 
         stage('Run Batch Script 2') {
@@ -26,6 +31,9 @@ pipeline {
         }
 
         stage('Run Batch Script 3') {
+             when {
+                always()
+            }
             steps {
                 echo 'Running Batch Script 3 (always runs, regardless of build status)...'
                 bat 'Script/Batch_script_3.bat'
