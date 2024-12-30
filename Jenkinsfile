@@ -16,8 +16,7 @@ pipeline {
                         sh 'mv haha.bat hehe.bat'
                         
                     } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'  // Đặt kết quả pipeline là 'FAILURE' nếu có lỗi
-                        throw e  // Ném lại lỗi để pipeline không dừng ngay lập tức
+                        currentBuild.result = 'FAILURE'  
                     }
                 }
             }
