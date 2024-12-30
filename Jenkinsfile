@@ -10,8 +10,15 @@ pipeline {
 
         stage('Run Batch Script 1') {
             steps {
-                echo 'Running Batch Script 1...'
-                bat 'exit 1'  
+                script {
+                    try {
+                        echo 'Running Batch Script 1...'
+                        sh 'exit 1'  // Giả lập lỗi
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'  // Đặt kết quả pipeline là 'FAILURE' nếu có lỗi
+                        throw e  // Ném lại lỗi để pipeline không dừng ngay lập tức
+                    }
+                }
             }
         }
 
@@ -36,18 +43,26 @@ pipeline {
     }
 
     post {
-        success {
-            echo 'Build Successful. Sending success email...'
-            mail to: 'nmtuan0311@gmail.com',
-                 subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Build was successful!"
+        always {
+            echo 'Pipeline finished.'
         }
-        failure {
-            echo 'Build Failed. Sending failure email...'
-            mail to: 'nmtuan0311@gmail.com',
-                 subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Build has failed"
-        }
-        
     }
 }
+
+
+    // post {
+    //     success {
+    //         echo 'Build Successful. Sending success email...'
+    //         mail to: 'nmtuan0311@gmail.com',
+    //              subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+    //              body: "Build was successful!"
+    //     }
+    //     failure {
+    //         echo 'Build Failed. Sending failure email...'
+    //         mail to: 'nmtuan0311@gmail.com',
+    //              subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+    //              body: "Build has failed"
+    //     }
+        
+    // }
+
