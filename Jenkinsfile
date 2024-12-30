@@ -11,21 +11,14 @@ pipeline {
         stage('Run Batch Script 1') {
             steps {
                 echo 'Running Batch Script 1...'
-                bat 'exit 1'  // Batch script 1 sẽ thất bại
+                bat 'Script/Batch_script_1.bat'
             }
-            post {
-                failure {
-                    echo 'Batch Script 1 failed, triggering Batch Script 2...'
-                    script {
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
-            }
+            
         }
 
         stage('Run Batch Script 2') {
             when {
-                expression { currentBuild.result == 'FAILURE' } // Chạy khi Batch Script 1 thất bại
+                expression { currentBuild.result == 'FAILURE' } 
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
