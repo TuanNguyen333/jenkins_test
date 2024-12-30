@@ -12,10 +12,9 @@ pipeline {
             steps {
                 script {
                     echo 'Running Batch Script 1...'
-                    def result = catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat 'Script/Batch_script_1.bat'
-                    }
-                    echo "Stage 1 Result: ${result}"
+                    
+                    bat 'Script/Batch_script_1.bat'
+                    
                 }
             }
         }
