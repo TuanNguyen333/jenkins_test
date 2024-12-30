@@ -16,12 +16,10 @@ pipeline {
                         bat 'Script/Batch_script_1.bat'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'  
-                        throw e
                     }
                 }
             }
         }
-
 
         stage('Run Batch Script 2') {
             when {
