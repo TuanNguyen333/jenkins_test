@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'Tuan' }  // This is the name of the agent defined in Jenkins configuration
+    agent { label 'Tuan' }
 
     stages {
         stage("Hello World") {
@@ -11,7 +11,7 @@ pipeline {
         stage('Run Batch Script 1') {
             steps {
                 echo 'Running Batch Script 1...'
-                 bat 'exit 1'
+                bat 'exit 1'
             }
             post {
                 failure {
@@ -31,9 +31,6 @@ pipeline {
         }
 
         stage('Run Batch Script 3') {
-             when {
-                always()
-            }
             steps {
                 echo 'Running Batch Script 3 (always runs, regardless of build status)...'
                 bat 'Script/Batch_script_3.bat'
@@ -55,6 +52,9 @@ pipeline {
             mail to: 'nmtuan0311@gmail.com',
                  subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "Build has failed"
+        }
+        always {
+            echo 'Running final cleanup actions...'
         }
     }
 }
