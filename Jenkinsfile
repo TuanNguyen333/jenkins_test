@@ -13,8 +13,7 @@ pipeline {
                 script {
                     try {
                         echo 'Running Batch Script 1...'
-                        sh 'mv haha.bat hehe.bat'
-                        
+                        bat 'Script/Batch_script_1.bat'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'  
                     }

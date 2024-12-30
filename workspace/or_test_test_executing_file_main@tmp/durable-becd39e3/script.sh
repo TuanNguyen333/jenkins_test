@@ -1,0 +1,1 @@
+mv haha.bat hehe.bat
