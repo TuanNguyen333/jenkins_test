@@ -11,7 +11,7 @@ pipeline {
         stage('Run Batch Script 1') {
             steps {
                 echo 'Running Batch Script 1...'
-                bat 'exit 1'  
+                bat 'exit 1'  // Batch script 1 sẽ thất bại
             }
             post {
                 failure {
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Run Batch Script 2') {
             when {
-                expression { currentBuild.result == 'FAILURE' }
+                expression { currentBuild.result == 'FAILURE' } // Chạy khi Batch Script 1 thất bại
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
