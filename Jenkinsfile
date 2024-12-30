@@ -22,7 +22,7 @@ pipeline {
 
         stage('Run Batch Script 2') {
             when {
-                expression { return currentBuild.currentResult == 'SUCCESS' || currentBuild.rawBuild.getPreviousBuild()?.getResult().toString() == 'FAILURE' }
+                expression { return currentBuild.currentResult == 'SUCCESS' || currentBuild.getResult().toString() == 'FAILURE' }
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
