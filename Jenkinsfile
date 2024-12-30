@@ -15,8 +15,8 @@ pipeline {
                         echo 'Running Batch Script 1...'
                         sh 'exit 1'  // Giả lập lỗi
                     } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'  // Đặt kết quả pipeline là 'FAILURE' nếu có lỗi
-                        throw e  // Ném lại lỗi để pipeline không dừng ngay lập tức
+                        currentBuild.result = 'FAILURE'  // Đặt kết quả build là FAILURE nếu có lỗi
+                        echo "Error in Batch Script 1, but continuing pipeline"
                     }
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
 
         stage('Run Batch Script 2') {
             when {
-                expression { return currentBuild.result == 'FAILURE' }
+                expression { return currentBuild.result == 'FAILURE' }  // Chỉ chạy khi Stage 1 thất bại
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
@@ -48,6 +48,7 @@ pipeline {
         }
     }
 }
+
 
 
     // post {
