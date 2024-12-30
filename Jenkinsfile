@@ -10,14 +10,19 @@ pipeline {
 
         stage('Run Batch Script 1') {
             steps {
-                echo 'Running Batch Script 1...'
-                bat 'Script/Batch_script_1.bat'
+                script {
+                    echo 'Running Batch Script 1...'
+                    def result = catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat 'Script/Batch_script_1.bat'
+                    }
+                    echo "Stage 1 Result: ${result}"
+                }
             }
         }
 
         stage('Run Batch Script 2') {
             when {
-                expression { return currentBuild.result == 'FAILURE' }
+                expression { return currentBuild.currentResult == 'SUCCESS' || currentBuild.rawBuild.getPreviousBuild()?.getResult().toString() == 'FAILURE' }
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
@@ -41,21 +46,3 @@ pipeline {
         }
     }
 }
-
-
-    // post {
-    //     success {
-    //         echo 'Build Successful. Sending success email...'
-    //         mail to: 'nmtuan0311@gmail.com',
-    //              subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-    //              body: "Build was successful!"
-    //     }
-    //     failure {
-    //         echo 'Build Failed. Sending failure email...'
-    //         mail to: 'nmtuan0311@gmail.com',
-    //              subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-    //              body: "Build has failed"
-    //     }
-        
-    // }
-
