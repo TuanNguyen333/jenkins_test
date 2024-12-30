@@ -12,16 +12,17 @@ pipeline {
             steps {
                 script {
                     echo 'Running Batch Script 1...'
-                    
-                    bat 'Script/Batch_script_1.bat'
-                    
+                    def result = catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat 'Script/Batch_script_1.bat'
+                    }
+                    echo "Stage 1 Result: ${result}"
                 }
             }
         }
 
         stage('Run Batch Script 2') {
             when {
-                expression { return currentBuild.currentResult == 'SUCCESS' || currentBuild.getResult().toString() == 'FAILURE' }
+                expression { return currentBuild.getResult().toString() == 'FAILURE' }
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
