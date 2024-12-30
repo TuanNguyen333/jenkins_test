@@ -1,5 +1,6 @@
 pipeline {
-    agent { label 'Tuan'}  // This is the name of the agent defined in Jenkins configuration
+    agent { label 'Tuan' }  // This is the name of the agent defined in Jenkins configuration
+
     stages {
         stage("Hello World") {
             steps {
@@ -32,8 +33,9 @@ pipeline {
                 archiveArtifacts artifacts: 'Script/logfile.log', fingerprint: true
             }
         }
-        
-        post {
+    }
+
+    post {
         success {
             echo 'Build Successful. Sending success email...'
             mail to: 'nmtuan0311@gmail.com',
@@ -44,10 +46,7 @@ pipeline {
             echo 'Build Failed. Sending failure email...'
             mail to: 'nmtuan0311@gmail.com',
                  subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Build was failed"
+                 body: "Build has failed"
         }
     }
-
-
-}
 }
