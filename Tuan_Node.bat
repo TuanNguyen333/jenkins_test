@@ -1,0 +1,2 @@
+curl.exe -sO http://localhost:8081/jnlpJars/agent.jar
+java -jar agent.jar -url http://localhost:8081/ -secret 519af4a8607abb1c8fcdf8845087e503683e0eee4d33a4c6251f43eb228991f8 -name Tuan -workDir "D:\code\test" -noCertificateCheck
