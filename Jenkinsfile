@@ -11,7 +11,7 @@ pipeline {
         stage('Run Batch Script 1') {
             steps {
                 echo 'Running Batch Script 1...'
-                sh 'exit 1'  
+                bat 'exit 1'  
             }
         }
 
