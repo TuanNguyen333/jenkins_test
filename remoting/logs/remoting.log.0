@@ -1,0 +1,31 @@
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher createEngine
+INFO: Setting up agent: Tuan
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher createEngine
+WARNING: Certificate validation for HTTPs endpoints is disabled
+Dec 30, 2024 10:12:56 AM hudson.remoting.Engine startEngine
+INFO: Using Remoting version: 3206.vb_15dcf73f6a_9
+Dec 30, 2024 10:12:56 AM org.jenkinsci.remoting.engine.WorkDirManager initializeWorkDir
+INFO: Using D:\code\test\remoting as a remoting work directory
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher$CuiListener status
+INFO: Locating server among [http://localhost:8081/]
+Dec 30, 2024 10:12:56 AM org.jenkinsci.remoting.engine.JnlpAgentEndpointResolver resolve
+INFO: Remoting server accepts the following protocols: [JNLP4-connect, Ping]
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher$CuiListener status
+INFO: Agent discovery successful
+  Agent address: localhost
+  Agent port:    50000
+  Identity:      fb:c6:6f:08:c1:93:a4:e4:05:6a:9b:c0:6b:80:c4:d9
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher$CuiListener status
+INFO: Handshaking
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher$CuiListener status
+INFO: Connecting to localhost:50000
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher$CuiListener status
+INFO: Server reports protocol JNLP4-connect-proxy not supported, skipping
+Dec 30, 2024 10:12:56 AM hudson.remoting.Launcher$CuiListener status
+INFO: Trying protocol: JNLP4-connect
+Dec 30, 2024 10:12:57 AM org.jenkinsci.remoting.protocol.impl.BIONetworkLayer$Reader run
+INFO: Waiting for ProtocolStack to start.
+Dec 30, 2024 10:12:57 AM hudson.remoting.Launcher$CuiListener status
+INFO: Remote identity confirmed: fb:c6:6f:08:c1:93:a4:e4:05:6a:9b:c0:6b:80:c4:d9
+Dec 30, 2024 10:12:57 AM hudson.remoting.Launcher$CuiListener status
+INFO: Connected
