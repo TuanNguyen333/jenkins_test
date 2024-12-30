@@ -15,10 +15,7 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Batch Script 1 failed, triggering Batch Script 2...'
-                    script {
-                        env.RUN_BATCH_SCRIPT_2 = 'true'  // Thiết lập biến môi trường trong block 'script'
-                    }
+                        env.RUN_BATCH_SCRIPT_2 = 'true' 
                 }
             }
         }
@@ -26,7 +23,7 @@ pipeline {
         stage('Run Batch Script 2') {
             when {
                 expression { 
-                    return env.RUN_BATCH_SCRIPT_2 == 'true'  // Kiểm tra giá trị của biến môi trường
+                    return env.RUN_BATCH_SCRIPT_2 == 'true' 
                 }
             }
             steps {
