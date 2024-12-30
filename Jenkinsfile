@@ -15,13 +15,12 @@ pipeline {
                         echo 'Running Batch Script 1...'
                         bat 'Script/Batch_script_1.bat'
                     } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'  // Đặt kết quả pipeline là 'FAILURE'
-                        throw e  // Ném lại lỗi để dừng pipeline
+                        currentBuild.result = 'FAILURE'  // Đặt kết quả pipeline là 'FAILURE' khi lỗi xảy ra
+                        throw e  // Ném lỗi để dừng ngay stage này
                     }
                 }
             }
         }
-
 
         stage('Run Batch Script 2') {
             when {
@@ -49,21 +48,3 @@ pipeline {
         }
     }
 }
-
-
-    // post {
-    //     success {
-    //         echo 'Build Successful. Sending success email...'
-    //         mail to: 'nmtuan0311@gmail.com',
-    //              subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-    //              body: "Build was successful!"
-    //     }
-    //     failure {
-    //         echo 'Build Failed. Sending failure email...'
-    //         mail to: 'nmtuan0311@gmail.com',
-    //              subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-    //              body: "Build has failed"
-    //     }
-        
-    // }
-
