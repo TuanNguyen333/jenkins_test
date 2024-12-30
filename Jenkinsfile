@@ -10,14 +10,8 @@ pipeline {
 
         stage('Run Batch Script 1') {
             steps {
-                script {
-                    try {
-                        echo 'Running Batch Script 1...'
-                        bat 'Script/Batch_script_1.bat'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'  
-                    }
-                }
+                echo 'Running Batch Script 1...'
+                bat 'Script/Batch_script_1.bat'
             }
         }
 
