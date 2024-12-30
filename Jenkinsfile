@@ -32,6 +32,20 @@ pipeline {
                 archiveArtifacts artifacts: 'Script/logfile.log', fingerprint: true
             }
         }
+        
+        post {
+        success {
+            echo 'Build Successful. Sending success email...'
+            mail to: 'nmtuan0311@gmail.com',
+                 subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build was successful!"
+        }
+        failure {
+            echo 'Build Failed. Sending failure email...'
+            mail to: 'nmtuan0311@gmail.com',
+                 subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build was failed"
+        }
     }
 
 
