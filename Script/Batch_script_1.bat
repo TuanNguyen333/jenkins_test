@@ -1,2 +1,2 @@
     @echo off   
-    ren haha.bat hehe.bat
+    echo "Hello World, script 2 is executing!"
