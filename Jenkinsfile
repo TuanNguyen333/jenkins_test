@@ -15,11 +15,13 @@ pipeline {
                         echo 'Running Batch Script 1...'
                         bat 'Script/Batch_script_1.bat'
                     } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'  
+                        currentBuild.result = 'FAILURE'  // Đặt kết quả pipeline là 'FAILURE'
+                        throw e  // Ném lại lỗi để dừng pipeline
                     }
                 }
             }
         }
+
 
         stage('Run Batch Script 2') {
             when {
