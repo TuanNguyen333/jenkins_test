@@ -11,11 +11,14 @@ pipeline {
         stage('Run Batch Script 1') {
             steps {
                 echo 'Running Batch Script 1...'
-                bat 'exit 1'
+                bat 'exit 1'  
             }
             post {
                 failure {
-                    echo 'Stage 1 failed, continuing to Stage 2...'
+                    echo 'Batch Script 1 failed, triggering Batch Script 2...'
+                    script {
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
