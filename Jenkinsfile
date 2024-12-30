@@ -11,14 +11,21 @@ pipeline {
         stage('Run Batch Script 1') {
             steps {
                 echo 'Running Batch Script 1...'
-                bat 'Script/Batch_script_1.bat'
+                bat 'exit 1'  
             }
-            
+            post {
+                failure {
+                    echo 'Batch Script 1 failed, triggering Batch Script 2...'
+                    script {
+                        env.RUN_BATCH_SCRIPT_2 = 'true'
+                    }
+                }
+            }
         }
 
         stage('Run Batch Script 2') {
             when {
-                expression { currentBuild.result == 'FAILURE' } 
+                expression {  return env.RUN_BATCH_SCRIPT_2 == 'true' } 
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
