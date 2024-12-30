@@ -17,7 +17,7 @@ pipeline {
                 failure {
                     echo 'Batch Script 1 failed, triggering Batch Script 2...'
                     script {
-                        env.RUN_BATCH_SCRIPT_2 = 'true'
+                        env.RUN_BATCH_SCRIPT_2 = 'true'  // Thiết lập biến môi trường trong block 'script'
                     }
                 }
             }
@@ -25,7 +25,9 @@ pipeline {
 
         stage('Run Batch Script 2') {
             when {
-                expression {  return env.RUN_BATCH_SCRIPT_2 == 'true' } 
+                expression { 
+                    return env.RUN_BATCH_SCRIPT_2 == 'true'  // Kiểm tra giá trị của biến môi trường
+                }
             }
             steps {
                 echo 'Running Batch Script 2 due to failure in previous stage...'
@@ -56,8 +58,6 @@ pipeline {
                  subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "Build has failed"
         }
-        always {
-            echo 'Running final cleanup actions...'
-        }
+        
     }
 }
