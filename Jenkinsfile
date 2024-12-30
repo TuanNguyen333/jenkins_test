@@ -1,5 +1,5 @@
 pipeline {
-    agent Tuan  // This is the name of the agent defined in Jenkins configuration
+    agent {'Tuan'}  // This is the name of the agent defined in Jenkins configuration
     stages {
         stage("Hello World") {
             steps {
